@@ -2,11 +2,9 @@
     <div
         class="bg-gray-800 w-full h-full mb-3 p-0 aspect-w-4 aspect-h-5 rounded-lg shadow-lg relative overflow-hidden border border-yellow-300 border-opacity-50">
         <div class="inset-0 z-0">
-            <img class="w-full h-full object-cover rounded-lg transition duration-300 transform hover:cursor-pointer"
-                :src="item.url" 
-                :class="{ 'aspect-ratio-5/8': !imageLoaded }"
-                @error="handleImageError"
-                @load="imageLoaded = true">
+            <v-lazy-image class="w-full h-full object-cover rounded-lg transition duration-300 transform hover:cursor-pointer"
+                :src="item.url" :class="{ 'aspect-ratio-5/8': !imageLoaded }" @error="handleImageError"
+                @load="imageLoaded = true"></v-lazy-image>
         </div>
         <div class="z-10 flex flex-col justify-between h-full w-full">
             <div class="absolute top-2 left-1 right-2 w-full flex justify-end items-center mb-4">
@@ -34,7 +32,8 @@
                             </svg>
                             Save image to collection
                         </li>
-                        <li class="px-4 py-2 hover:bg-gray-700 cursor-pointer flex space-x-2 items-center hover:rounded-lg m-2">
+                        <li
+                            class="px-4 py-2 hover:bg-gray-700 cursor-pointer flex space-x-2 items-center hover:rounded-lg m-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" class="tabler-icon tabler-icon-eye-off mr-2">
@@ -46,7 +45,8 @@
                             </svg>
                             View Post
                         </li>
-                        <li class="px-4 py-2 hover:bg-gray-700 cursor-pointer flex space-x-2 items-center hover:rounded-lg m-2">
+                        <li
+                            class="px-4 py-2 hover:bg-gray-700 cursor-pointer flex space-x-2 items-center hover:rounded-lg m-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" class="tabler-icon tabler-icon-user-off mr-2">
@@ -59,7 +59,8 @@
                             </svg>
                             Hide content from this user
                         </li>
-                        <li class="px-4 py-2 hover:bg-gray-700 cursor-pointer flex space-x-2 items-center hover:rounded-lg m-2">
+                        <li
+                            class="px-4 py-2 hover:bg-gray-700 cursor-pointer flex space-x-2 items-center hover:rounded-lg m-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" class="tabler-icon tabler-icon-flag mr-2">
@@ -107,7 +108,12 @@
 </template>
 
 <script>
+import VLazyImage from "v-lazy-image";
+
 export default {
+    components: {
+        VLazyImage
+    },
     props: {
         item: Object
     },
@@ -143,7 +149,7 @@ export default {
 
             return 'image';
         },
-        
+
         handleImageError(event) {
             event.target.src = 'https://via.placeholder.com/150';
         },
@@ -155,7 +161,7 @@ export default {
                 if (!moreOptions.value && !moreOptions.contains(event.target)) {
                     this.showTooltip = false;
                 }
-            } catch(err) {
+            } catch (err) {
                 this.showTooltip = true;
             }
         },
