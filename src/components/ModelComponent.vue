@@ -3,7 +3,9 @@
         class="bg-gray-800 w-full h-full mb-3 p-0 aspect-w-4 aspect-h-5 rounded-lg shadow-lg relative overflow-hidden border border-yellow-300 border-opacity-50">
         <div class="inset-0 z-0">
             <v-lazy-image class="w-full h-full object-cover rounded-lg transition duration-300 transform hover:cursor-pointer"
-                :src="item.url" :class="{ 'aspect-ratio-5/8': !imageLoaded }" @error="handleImageError"
+                :src="item.url" :class="{ 'aspect-ratio-5/8': !imageLoaded }" 
+                :src-placeholder="'https://via.placeholder.com/150'"
+                @error="() => item.url = 'https://via.placeholder.com/150'"
                 @load="imageLoaded = true"></v-lazy-image>
         </div>
         <div class="z-10 flex flex-col justify-between h-full w-full">
@@ -148,10 +150,6 @@ export default {
             }
 
             return 'image';
-        },
-
-        handleImageError(event) {
-            event.target.src = 'https://via.placeholder.com/150';
         },
 
         handleOutsideClick(event) {
